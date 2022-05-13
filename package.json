@@ -1,9 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "lingui extract && lingui compile && next dev",
+    "build": "lingui extract && lingui compile && next build",
+    "start": "lingui extract && lingui compile && next start",
+    "lang-ext": "lingui extract",
+    "lang-comp": "lingui compile",
+    "lang-add": "lingui extract && lingui compile"
   },
   "dependencies": {
     "@lingui/react": "^3.13.3",
