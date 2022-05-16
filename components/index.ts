@@ -1,3 +1,6 @@
 export * from './title'
 export * from './login-form'
 export * from './spinner'
+export * from './navbar'
+export * from './screen'
+export * from './hero-image'

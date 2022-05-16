@@ -1,5 +1,10 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import '../styles/globals.css'
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource/poppins/700.css'
+import Head from 'next/head'
 import { AuthProvider } from '../hooks/useAuth'
 import { GlobalProvider } from '../hooks/use-global-store'
 import { UIProvider } from '../hooks/use-ui-store'
@@ -9,6 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <GlobalProvider>
         <UIProvider>
+          <Head>
+            <title>Domenico Mottola | Official Website</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
           <Component {...pageProps} />
         </UIProvider>
       </GlobalProvider>
