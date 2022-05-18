@@ -8,6 +8,7 @@ import Head from 'next/head'
 import { AuthProvider } from '../hooks/useAuth'
 import { GlobalProvider } from '../hooks/use-global-store'
 import { UIProvider } from '../hooks/use-ui-store'
+import { Envs } from '../types/envs'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <UIProvider>
           <Head>
             <title>Domenico Mottola | Official Website</title>
+            <meta name="version" content={Envs.version} />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Component {...pageProps} />
