@@ -1,14 +1,12 @@
 import { createContext, useContext } from 'react'
 import useFirebaseAuth from '../utils/firebaseAuthService'
-import IFirebaseUser from '../types/IFIrebaseUser'
+import FirebaseUser from '../types/FIrebaseUser'
 
 const authUserCtx = createContext<{
-  loggedUser: IFirebaseUser | null
-  loading: boolean
+  loggedUser: FirebaseUser | null
   login: (email: string, password: string) => Promise<void>
 }>({
   loggedUser: null,
-  loading: false,
   login: async () => {},
 })
 

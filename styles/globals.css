@@ -1,7 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-input:disabled {
-    opacity: 0.5;
-}

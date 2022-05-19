@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import IFirebaseUser from '../types/IFIrebaseUser'
+import FirebaseUser from '../types/FIrebaseUser'
 import { firebaseAuth } from './firebaseInitializer'
 import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
+import { useLoadingCtx } from '../context/LoadingContext'
 
 export default function useFirebaseAuth() {
-  const [loggedUser, setLoggedUser] = useState<IFirebaseUser | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [loggedUser, setLoggedUser] = useState<FirebaseUser | null>(null)
+  const { startLoading, stopLoading } = useLoadingCtx()
 
   const login = async (userEmail: string, password: string) => {
-    setLoading(true)
+    startLoading()
     try {
       const response = await new Promise<UserCredential>((r) =>
         setTimeout(() => {
@@ -25,13 +26,12 @@ export default function useFirebaseAuth() {
     } catch (error) {
       // error handling
     }
-    setLoading(false)
+    stopLoading()
     return
   }
 
   return {
     loggedUser,
-    loading,
     login,
   }
 }
