@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { loadingService } from '../utils/loadingService'
+import { createContext, ReactNode, useContext } from 'react'
+import { loadingService } from '../utils'
 
 const loadingCtx = createContext<{
   loading: boolean
@@ -11,13 +11,12 @@ const loadingCtx = createContext<{
   stopLoading: () => {},
 })
 
-export function LoadingProvider({
-  children,
-  isLoading,
-}: {
-  children: JSX.Element
+interface Props {
+  children: ReactNode
   isLoading: (trueOrFalse: boolean) => void
-}) {
+}
+
+export const LoadingProvider = ({ children, isLoading }: Props) => {
   return (
     <loadingCtx.Provider value={loadingService(isLoading)}>
       {children}

@@ -1,4 +1,4 @@
-export default interface FirebaseUser {
+export interface FirebaseUser {
   email: string
   uid: string
 }
