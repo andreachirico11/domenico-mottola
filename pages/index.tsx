@@ -4,13 +4,12 @@ import { Title } from '../components'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
         <title>Domenico Mottola | Official Website</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="w-full items-center text-center">
+      <main className="items-center w-full text-center">
         <Title />
       </main>
     </div>

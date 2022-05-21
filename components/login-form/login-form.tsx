@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { useAuthCtx } from '../../context/AuthUserContext'
 import { ButtonE, InputE } from '../../types'
 import { TextInput } from '../text-input'
 
 export const LoginForm = () => {
+  const { login, loading } = useAuthCtx()
   const [validationError, setValidationError] = useState({
     email: false,
     password: false,
@@ -11,6 +14,7 @@ export const LoginForm = () => {
     email: '',
     password: '',
   })
+  const router = useRouter()
 
   const handleChange = (e: InputE) => {
     const { name, value } = e.currentTarget
@@ -20,8 +24,10 @@ export const LoginForm = () => {
   const handleSubmit = (e: ButtonE) => {
     e.preventDefault()
     // add validation
-    setValidationError({ email: true, password: true })
-    console.log(loginForm)
+    // setValidationError({ email: true, password: true })
+    login(loginForm.email, loginForm.password).then(() => {
+      router.push('admin')
+    })
   }
 
   return (
@@ -32,6 +38,7 @@ export const LoginForm = () => {
         type="email"
         handleChange={handleChange}
         error={validationError.email}
+        disabled={loading}
       />
       <TextInput
         value={loginForm.password}
@@ -39,6 +46,7 @@ export const LoginForm = () => {
         type="password"
         handleChange={handleChange}
         error={validationError.password}
+        disabled={loading}
       />
       <button
         className="rounded-md bg-green-200 py-2 hover:bg-green-300"
