@@ -1,4 +1,4 @@
 export * from './capitalize'
-export * from './firebaseInitializer'
-export * from './useFirebaseAuth'
-export * from './loadingService'
+export * from './firebase-init'
+export * from './make-store'
+export * from './create-reducer'
