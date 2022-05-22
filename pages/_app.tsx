@@ -1,21 +1,18 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { AuthProvider } from '../context/AuthUserContext'
-import { useEffect, useState } from 'react'
-import { Loading } from '../components/loading-spinner'
-import { LoadingProvider } from '../context/LoadingContext'
+import { AuthProvider } from '../hooks/useAuth'
+import { GlobalProvider } from '../hooks/use-global-store'
+import { UIProvider } from '../hooks/use-ui-store'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isLoading, setIsLoading] = useState(false)
   return (
-    <>
-      {isLoading && <Loading />}
-      <LoadingProvider isLoading={setIsLoading}>
-        <AuthProvider>
+    <AuthProvider>
+      <GlobalProvider>
+        <UIProvider>
           <Component {...pageProps} />
-        </AuthProvider>
-      </LoadingProvider>
-    </>
+        </UIProvider>
+      </GlobalProvider>
+    </AuthProvider>
   )
 }
 

@@ -1,3 +1,3 @@
 export * from './form-types'
 export * from './envs'
-export * from './FirebaseUser'
+export * from './context-types'
