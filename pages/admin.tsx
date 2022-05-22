@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
-import { useAuthCtx } from '../context/AuthUserContext'
+import { useAuth } from '../hooks/useAuth'
 
 const Admin: NextPage = () => {
-  const { loggedUser } = useAuthCtx()
+  const { user } = useAuth()
   return (
     <>
       <h1>admin page</h1>
-      <p>{loggedUser?.email} logged in</p>
+      <p>{user?.email} logged in</p>
     </>
   )
 }

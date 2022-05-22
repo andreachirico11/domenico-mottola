@@ -1,11 +1,15 @@
-import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useAuthCtx } from '../../context/AuthUserContext'
+import { useGlobalDispatch, useGlobalStore } from '../../hooks/use-global-store'
+import { useAuth } from '../../hooks/useAuth'
 import { ButtonE, InputE } from '../../types'
+import { Spinner } from '../spinner'
 import { TextInput } from '../text-input'
 
 export const LoginForm = () => {
-  const { login, loading } = useAuthCtx()
+  const { login } = useAuth()
+  const { isLoading } = useGlobalStore()
+  const dispatch = useGlobalDispatch()
+
   const [validationError, setValidationError] = useState({
     email: false,
     password: false,
@@ -14,20 +18,17 @@ export const LoginForm = () => {
     email: '',
     password: '',
   })
-  const router = useRouter()
 
   const handleChange = (e: InputE) => {
     const { name, value } = e.currentTarget
     setLoginForm({ ...loginForm, [name]: value })
   }
 
-  const handleSubmit = (e: ButtonE) => {
-    e.preventDefault()
-    // add validation
-    // setValidationError({ email: true, password: true })
-    login(loginForm.email, loginForm.password).then(() => {
-      router.push('admin')
-    })
+  const handleSubmit = async (e: ButtonE) => {
+    dispatch({ type: 'startLoader' })
+    await login(loginForm.email, loginForm.password)
+      .catch((error) => alert(error.message))
+      .finally(() => dispatch({ type: 'stopLoader' }))
   }
 
   return (
@@ -38,7 +39,7 @@ export const LoginForm = () => {
         type="email"
         handleChange={handleChange}
         error={validationError.email}
-        disabled={loading}
+        disabled={isLoading}
       />
       <TextInput
         value={loginForm.password}
@@ -46,14 +47,19 @@ export const LoginForm = () => {
         type="password"
         handleChange={handleChange}
         error={validationError.password}
-        disabled={loading}
+        disabled={isLoading}
       />
-      <button
-        className="rounded-md bg-green-200 py-2 hover:bg-green-300"
-        onClick={handleSubmit}
-      >
-        Login
-      </button>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <button
+          disabled={isLoading}
+          className="rounded-md bg-green-200 py-2 hover:bg-green-300"
+          onClick={handleSubmit}
+        >
+          Login
+        </button>
+      )}
     </div>
   )
 }

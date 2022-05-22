@@ -1,4 +1,4 @@
-import { initializeApp, getApps } from 'firebase/app'
+import { initializeApp, getApps, getApp } from 'firebase/app'
 import { Envs } from '../types'
 import { getAuth } from 'firebase/auth'
 
@@ -9,6 +9,6 @@ const app =
         authDomain: Envs.firebaseAuthDomain,
         projectId: Envs.firebaseProjectId,
       })
-    : getApps()[0]
+    : getApp()
 
 export const firebaseAuth = getAuth(app)
