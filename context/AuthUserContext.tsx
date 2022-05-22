@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
-import useFirebaseAuth from '../utils/firebaseAuthService'
-import FirebaseUser from '../types/FIrebaseUser'
+import { useFirebaseAuth } from '../utils'
+import { FirebaseUser } from '../types'
 
 const authUserCtx = createContext<{
   loggedUser: FirebaseUser | null

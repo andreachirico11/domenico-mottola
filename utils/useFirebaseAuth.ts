@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import FirebaseUser from '../types/FIrebaseUser'
 import { firebaseAuth } from './firebaseInitializer'
 import { signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import { useLoadingCtx } from '../context/LoadingContext'
+import { FirebaseUser } from '../types'
 
-export default function useFirebaseAuth() {
+export const useFirebaseAuth = () => {
   const [loggedUser, setLoggedUser] = useState<FirebaseUser | null>(null)
   const { startLoading, stopLoading } = useLoadingCtx()
 
