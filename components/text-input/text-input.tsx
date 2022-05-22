@@ -23,7 +23,7 @@ export const TextInput = ({
     <div className="flex flex-col space-y-1">
       <label className="text-sm">{label}</label>
       <input
-        className="p-2 border-2 rounded-sm disabled:opacity-50"
+        className="rounded-sm border-2 p-2 disabled:opacity-50"
         onChange={(e) => handleChange(e)}
         type={type}
         name={type}
