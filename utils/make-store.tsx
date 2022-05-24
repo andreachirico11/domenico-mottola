@@ -1,7 +1,10 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, ReactNode, useContext, useReducer } from 'react'
 import { R, S, StoreProps } from '../types'
 
-export const makeStore = (reducer: R, initialState: S) => {
+export const makeStore = (
+  reducer: R,
+  initialState: S
+): [(children: StoreProps) => JSX.Element, () => any, () => any] => {
   const storeContext = createContext(initialState)
   const dispatchContext = createContext(initialState)
 
