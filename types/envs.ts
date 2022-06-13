@@ -10,4 +10,8 @@ export class Envs {
   static get firebaseProjectId() {
     return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!
   }
+
+  static get version() {
+    return process.env.NEXT_PUBLIC_VERSION
+  }
 }
