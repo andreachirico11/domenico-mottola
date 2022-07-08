@@ -3,16 +3,21 @@ import { useRouter } from 'next/router'
 
 type Props = LinkProps & {
   label: string
+  textStyle: 'uppercase' | 'lowercase' | 'capitalize' | 'normal-case'
 }
 
-export const NavLink = ({ label, href }: Props) => {
+export const NavLink = ({ label, href, textStyle }: Props) => {
   const router = useRouter()
   const isActive = router.asPath === `/${href}`
 
   return (
-    <li className="hover:link-style list-none py-2 px-3 text-xl font-medium">
+    <li className="px-3 py-2 text-xl font-medium list-none hover:link-style">
       <Link href={href}>
-        <a className={isActive ? 'link-style underline' : ''}>{label}</a>
+        <a
+          className={(isActive ? 'link-style underline' : '') + ' ' + textStyle}
+        >
+          {label}
+        </a>
       </Link>
     </li>
   )

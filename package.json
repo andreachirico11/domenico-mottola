@@ -8,9 +8,9 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "firebase": "^9.8.1",
     "@fontsource/poppins": "^4.5.8",
     "next": "latest",
+    "next-i18next": "^11.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
