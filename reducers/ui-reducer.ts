@@ -1,22 +1,23 @@
 import { createReducer } from '../utils/create-reducer'
 
 interface UIState {
-  isLoading: boolean
+  isNavOpen: boolean
 }
 
 export const initialUIState: UIState = {
-  isLoading: false,
+  isNavOpen: false,
 }
 
-const startLoader = (state: UIState) => {
-  return { ...state, isLoading: true }
+const toggleNav = (state: UIState) => {
+  const { isNavOpen: prevState } = state
+  return { ...state, isNavOpen: !prevState }
 }
 
-const stopLoader = (state: UIState) => {
-  return { ...state, isLoading: false }
+const closeNav = (state: UIState) => {
+  return { ...state, isNavOpen: false }
 }
 
 export const UIReducer = createReducer({
-  startLoader: (state: UIState) => startLoader(state),
-  stopLoader: (state: UIState) => stopLoader(state),
+  toggleNav: (state: UIState) => toggleNav(state),
+  closeNav: (state: UIState) => closeNav(state),
 })

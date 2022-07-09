@@ -7,7 +7,7 @@ interface Props {
 
 export const Screen = ({ children, id }: Props) => {
   return (
-    <section id={id} className="relative min-h-screen overflow-x-hidden pt-20">
+    <section id={id} className="relative min-h-screen overflow-x-hidden">
       {children}
     </section>
   )
