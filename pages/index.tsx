@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
-import { HeroImage, Navbar, Screen, Title } from '../components'
+import { HeroImage, Navbar, Screen, SectionTitle, Title } from '../components'
 
 const Home: NextPage = () => {
   return (
     <div className="h-full w-full bg-green-primary">
-      <header className="h-19 fixed top-0 left-0 z-50 w-full ">
+      <header className="fixed top-0 left-0 z-50 h-20 w-screen">
         <Navbar />
       </header>
       <main className="h-full font-display sm:px-6">
@@ -12,9 +12,15 @@ const Home: NextPage = () => {
           <Title />
           <HeroImage />
         </Screen>
-        <Screen id="about">About</Screen>
-        <Screen id="concerts">Concerts</Screen>
-        <Screen id="contact">Contact</Screen>
+        <Screen id="about">
+          <SectionTitle>About</SectionTitle>
+        </Screen>
+        <Screen id="concerts">
+          <SectionTitle>Concerts</SectionTitle>
+        </Screen>
+        <Screen id="contact">
+          <SectionTitle>Contact</SectionTitle>
+        </Screen>
       </main>
     </div>
   )
