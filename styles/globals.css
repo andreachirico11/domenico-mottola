@@ -6,9 +6,13 @@
   .light-shadow {
     text-shadow: 1px 1px 0px #f6eaea;
   }
+  .light-box-shadow {
+    box-shadow: 4px 4px 0px #f6eaea;
+  }
   .dark-shadow {
     text-shadow: 4px 4px 0px #667257;
   }
+
   .image-large {
     width: 60%;
     min-width: 50rem;
