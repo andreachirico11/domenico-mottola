@@ -8,18 +8,23 @@ import type {
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ParsedUrlQuery } from 'querystring'
+import { CtaButton } from '../components/cta-button'
+import { Heading } from '../components/heading'
 
 const Home: NextPage = () => {
   const { t } = useTranslation('index')
 
   return (
-    <div className="w-full h-full bg-green-primary">
-      <header className="fixed top-0 left-0 z-50 w-screen h-20">
+    <div className="h-full w-full bg-green-primary">
+      <header className="fixed top-0 left-0 z-50 h-20 w-screen">
         <Navbar t={t} />
       </header>
       <main className="h-full font-display sm:px-6">
         <Screen>
-          <Title t={t} />
+          <Heading>
+            <Title>{t('main_title')}</Title>
+            <CtaButton onClick={() => {}}>{t('cta_button')}</CtaButton>
+          </Heading>
           <HeroImage />
         </Screen>
         <Screen id="about">

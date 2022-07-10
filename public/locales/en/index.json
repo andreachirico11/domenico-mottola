@@ -1,9 +1,10 @@
 {
-    "main_title": "domenico mottola",
-    "navbar": {
-        "About": "About",
-        "Concerts": "Concerts",
-        "Contact": "Contact",
-        "Home": "DOMENICO MOTTOLA"
-    }
+  "main_title": "DOMENICO MOTTOLA",
+  "navbar": {
+    "About": "About",
+    "Concerts": "Concerts",
+    "Contact": "Contact",
+    "Home": "DOMENICO MOTTOLA"
+  },
+  "cta_button": "Listen on Spotify"
 }
