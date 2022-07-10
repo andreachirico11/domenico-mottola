@@ -14,7 +14,7 @@ export const NavLink = ({ label, href }: Props) => {
   return (
     <li
       onClick={() => dispatch({ type: 'closeNav' })}
-      className="hover:link-style list-none py-2 px-3 text-center text-4xl font-medium sm:text-left sm:text-xl sm:first:flex-1"
+      className="hover:link-style list-none px-3 py-2 text-center text-4xl font-medium sm:text-left sm:text-xl sm:first:flex-1"
     >
       <Link href={href}>
         <a className={isActive ? 'link-style underline' : ''}>{label}</a>
