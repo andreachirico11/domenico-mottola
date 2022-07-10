@@ -4,7 +4,7 @@ interface route {
 }
 
 export const routes: route[] = [
-  { label: 'DOMENICO MOTTOLA', to: '/' },
+  { label: 'Home', to: '/' },
   { label: 'About', to: '#about' },
   { label: 'Concerts', to: '#concerts' },
   { label: 'Contact', to: '#contact' },

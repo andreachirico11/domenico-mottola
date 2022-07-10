@@ -9,6 +9,7 @@ import { AuthProvider } from '../hooks/useAuth'
 import { GlobalProvider } from '../hooks/use-global-store'
 import { UIProvider } from '../hooks/use-ui-store'
 import { Envs } from '../types/envs'
+import { appWithTranslation } from 'next-i18next'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -27,4 +28,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)
