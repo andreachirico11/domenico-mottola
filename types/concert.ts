@@ -3,6 +3,6 @@ export interface Concert {
   date: Date
   adress: string
   venue: string
-  description: { [key: string]: string }[]
+  descriptions: { [key: string]: string }[]
   ticket: number | 'free'
 }

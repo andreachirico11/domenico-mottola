@@ -9,10 +9,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ParsedUrlQuery } from 'querystring'
 import { ConcertForm } from '../components/concert-form'
 import { useAuth } from '../hooks/useAuth'
+import { Envs } from '../types'
 
 const Admin: NextPage = () => {
   const { user } = useAuth()
-  const { t } = useTranslation('admin')
+  const { t, i18n } = useTranslation('admin')
+
+  console.log(i18n.languages)
+
   return (
     <>
       <ConcertForm t={t}></ConcertForm>
@@ -33,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (
         {
           i18n: {
             defaultLocale: 'en',
-            locales: ['en'],
+            locales: Envs.languages,
           },
         }
       )),

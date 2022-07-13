@@ -1,0 +1,13 @@
+{
+    "concert_form": {
+        "adress": "Adress",
+        "date": "Date",
+        "ticket": "Ticket price",
+        "venue": "Venue",
+        "submit": "Create",
+        "description": {
+            "en": "English",
+            "it": "Italiano"
+        }
+    }
+}

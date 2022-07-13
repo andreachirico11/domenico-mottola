@@ -1,29 +1,31 @@
-import { TFunction } from 'next-i18next'
-import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
-import { Concert } from '../../types'
+import { TFunction, UserConfig } from 'next-i18next'
+import { Formik, Field, Form, FieldArray } from 'formik'
+import { Concert, Envs } from '../../types'
 import { FormikInput } from '../formik-input'
 
 const initialValues: Concert = {
   _id: '',
   adress: '',
   date: new Date(),
-  description: [],
+  descriptions: [],
   ticket: 'free',
   venue: '',
 }
 
 export const ConcertForm = ({ t }: { t: TFunction }) => {
+  const locales = Envs.languages
+  const descriptions = locales.map((locale) => ({ [locale]: '' }))
   return (
     <>
       <Formik
-        initialValues={initialValues}
+        initialValues={{ ...initialValues, descriptions }}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500))
           alert(JSON.stringify(values, null, 2))
         }}
       >
-        {({ values }) => (
-          <Form>
+        {() => (
+          <Form className="w-1/2 p-2 mx-auto">
             <Field type="hidden" name="_id" />
             <FormikInput
               type="text"
@@ -45,83 +47,21 @@ export const ConcertForm = ({ t }: { t: TFunction }) => {
               name="venue"
               label={t('concert_form.venue')}
             />
-            <FormikInput
-              type="text"
-              name="adress"
-              label={t('concert_form.adress')}
-            />
-
-            {/* 
-            <label className="text-sm" htmlFor="adress">
-              {t('concert_form.adress')}
-            </label>
-            <Field
-              className="p-2 border-2 rounded-sm disabled:opacity-50"
-              id="adress"
-              type="text"
-              name="adress"
-            />
-            <label className="text-sm" htmlFor="date">
-              {t('concert_form.date')}
-            </label>
-            <Field
-              className="p-2 border-2 rounded-sm disabled:opacity-50"
-              id="date"
-              type="date"
-              name="date"
-            />
-            <label className="text-sm" htmlFor="ticket">
-              {t('concert_form.ticket')}
-            </label>
-            <Field
-              className="p-2 border-2 rounded-sm disabled:opacity-50"
-              id="ticket"
-              type="number"
-              name="ticket"
-            />
-            <label className="text-sm" htmlFor="venue">
-              {t('concert_form.venue')}
-            </label>
-            <Field
-              className="p-2 border-2 rounded-sm disabled:opacity-50"
-              id="venue"
-              type="text"
-              name="venue"
-            /> */}
-            <FieldArray name="description">
-              {({ insert, remove, push }) => (
-                <div>
-                  {['en', 'it'].map((locale, index) => (
-                    // <div className="row" key={index}>
-                    //   <div>
-                    //     <label
-                    //       className="text-sm"
-                    //       htmlFor={`friends.${index}.name`}
-                    //     >
-                    //       {t('concert_form.description.' + locale)}
-                    //     </label>
-                    //     <Field
-                    //       className="p-2 border-2 rounded-sm disabled:opacity-50"
-                    //       name={locale}
-                    //       type="text"
-                    //       required
-                    //     />
-                    //     {/* <ErrorMessage
-                    //         name={`friends.${index}.name`}
-                    //         component="div"
-                    //         className="field-error"
-                    //       /> */}
-                    //   </div>
-                    // </div>
+            <FieldArray
+              name="descriptions"
+              render={() => (
+                <div className="grid grid-flow-col">
+                  {locales.map((locale, index) => (
                     <FormikInput
+                      key={index}
                       type="text"
-                      name={locale}
+                      name={`descriptions.${index}.${locale}`}
                       label={t('concert_form.description.' + locale)}
                     />
                   ))}
                 </div>
               )}
-            </FieldArray>
+            ></FieldArray>
             <button type="submit">{t('concert_form.submit')}</button>
           </Form>
         )}
