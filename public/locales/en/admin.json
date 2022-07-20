@@ -8,6 +8,13 @@
         "description": {
             "en": "English",
             "it": "Italiano"
+        },
+        "errors": {
+            "min": "The {{field}} field is too short",
+            "max": "The {{field}} field is too long",
+            "required": "The {{field}} field is required",
+            "min_date": "The {{field}} field is before the minimum date",
+            "min_number_negative": "The {{field}} field must be greater than 0"
         }
     }
 }

@@ -17,8 +17,6 @@ export class Envs {
 
   static get languages() {
     const lans = process.env.NEXT_PUBLIC_LANGUAGES!
-    console.log(lans.split(','))
-
     return lans ? lans.split(',') : ['en']
   }
 }

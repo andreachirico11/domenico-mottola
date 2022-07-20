@@ -13,10 +13,7 @@ import { Envs } from '../types'
 
 const Admin: NextPage = () => {
   const { user } = useAuth()
-  const { t, i18n } = useTranslation('admin')
-
-  console.log(i18n.languages)
-
+  const { t } = useTranslation('admin')
   return (
     <>
       <ConcertForm t={t}></ConcertForm>
