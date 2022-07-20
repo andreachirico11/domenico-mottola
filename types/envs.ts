@@ -1,26 +1,22 @@
-const addBase = (env: string) => {
-  return process.env['NEXT_PUBLIC_' + env]
-}
-
 export class Envs {
   static get firebaseApiKey() {
-    return addBase('FIREBASE_PUBLIC_API_KEY')
+    return process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY!
   }
 
   static get firebaseAuthDomain() {
-    return addBase('FIREBASE_AUTH_DOMAIN')
+    return process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!
   }
 
   static get firebaseProjectId() {
-    return addBase('FIREBASE_PROJECT_ID')
+    return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!
   }
 
   static get version() {
-    return addBase('VERSION')
+    return process.env.NEXT_PUBLIC_VERSION
   }
 
   static get languages() {
-    const lans = addBase('LANGUAGES')
+    const lans = process.env.NEXT_PUBLIC_LANGUAGES!
     console.log(lans.split(','))
 
     return lans ? lans.split(',') : ['en']
