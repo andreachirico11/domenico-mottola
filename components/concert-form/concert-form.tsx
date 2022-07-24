@@ -1,108 +1,82 @@
-import { TFunction, UserConfig } from 'next-i18next'
+import { TFunction } from 'next-i18next'
 import { Formik, Field, Form, FieldArray } from 'formik'
 import { Concert, Envs } from '../../types'
-import { FormikInput } from '../formik-input'
-import * as Yup from 'yup'
+import { FormInput } from '../form-input'
+import { validationSchema } from './concert-form-validation-schema'
+import { getErrMsgFunction } from '../../utils/getErrMsgFunction'
 
 const initialValues: Concert = {
   _id: '',
   adress: '',
-  date: new Date(),
+  date: '',
   descriptions: [],
-  ticket: 'free',
+  ticket: 0,
   venue: '',
 }
 
 export const ConcertForm = ({ t }: { t: TFunction }) => {
-  const locales = Envs.languages
-  const descriptions = locales.map((locale) => ({ [locale]: '' }))
-  const schema = Yup.object().shape({
-    adress: Yup.string()
-      .min(2, 'min')
-      .max(50, 'Adress is too short!')
-      .required('required'),
-    date: Yup.date()
-      .min(new Date('01-01-1900'), 'min_date')
-      .required('required'),
-    ticket: Yup.number().min(0, 'min_number_negative').required('required'),
-    venue: Yup.string().required('required'),
-  })
+  const descriptions = Envs.languages.map((locale) => ({ [locale]: '' }))
+  const getErrormessage = getErrMsgFunction('concert_form', t)
+
+  const mockSubmit = (values: any) => {
+    console.log('submit')
+    console.log(values)
+  }
+
   return (
     <>
       <Formik
         initialValues={{ ...initialValues, descriptions }}
-        validationSchema={schema}
-        onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500))
-          alert(JSON.stringify(values, null, 2))
-        }}
+        validationSchema={validationSchema}
+        onSubmit={mockSubmit}
       >
-        {({ errors, touched }) => (
+        {() => (
           <Form className="w-1/2 p-2 mx-auto">
             <Field type="hidden" name="_id" />
-            <FormikInput
-              type="text"
+            <Field
               name="adress"
               label={t('concert_form.adress')}
+              getErrorMessage={getErrormessage}
+              component={FormInput}
             />
-            {touched.adress && errors.adress && (
-              <div>
-                {t('concert_form.errors.' + errors.adress, {
-                  field: t('concert_form.adress'),
-                })}
-              </div>
-            )}
-            <FormikInput
+            <Field
               type="date"
               name="date"
               label={t('concert_form.date')}
+              getErrorMessage={getErrormessage}
+              component={FormInput}
             />
-            {touched.date && errors.date && (
-              <div>
-                {t('concert_form.errors.' + errors.date, {
-                  field: t('concert_form.date'),
-                })}
-              </div>
-            )}
-            <FormikInput
+            <Field
               type="number"
               name="ticket"
               label={t('concert_form.ticket')}
+              getErrorMessage={getErrormessage}
+              component={FormInput}
             />
-            {touched.ticket && errors.ticket && (
-              <div>
-                {t('concert_form.errors.' + errors.ticket, {
-                  field: t('concert_form.ticket'),
-                })}
-              </div>
-            )}
-            <FormikInput
-              type="text"
+            <Field
               name="venue"
               label={t('concert_form.venue')}
+              getErrorMessage={getErrormessage}
+              component={FormInput}
             />
-            {touched.venue && errors.venue && (
-              <div>
-                {t('concert_form.errors.' + errors.venue, {
-                  field: t('concert_form.venue'),
-                })}
-              </div>
-            )}
+
             <FieldArray
               name="descriptions"
               render={() => (
                 <div className="grid grid-flow-col">
-                  {locales.map((locale, index) => (
-                    <FormikInput
+                  {Envs.languages.map((locale, index) => (
+                    <Field
                       key={index}
-                      type="text"
                       name={`descriptions.${index}.${locale}`}
                       label={t('concert_form.description.' + locale)}
+                      getErrorMessage={getErrormessage}
+                      component={FormInput}
                     />
                   ))}
                 </div>
               )}
             ></FieldArray>
+
             <button type="submit">{t('concert_form.submit')}</button>
           </Form>
         )}
