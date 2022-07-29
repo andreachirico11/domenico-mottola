@@ -14,4 +14,9 @@ export class Envs {
   static get version() {
     return process.env.NEXT_PUBLIC_VERSION
   }
+
+  static get languages() {
+    const lans = process.env.NEXT_PUBLIC_LANGUAGES!
+    return lans ? lans.split(',') : ['en']
+  }
 }

@@ -1,0 +1,7 @@
+{
+    "form": {
+        "email": "Your email",
+        "password": "Your password",
+        "btn_login": "Login"
+    }
+}
