@@ -11,6 +11,10 @@ export class Envs {
     return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!
   }
 
+  static get firebaseDatabaseURL() {
+    return process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL!
+  }
+
   static get version() {
     return process.env.NEXT_PUBLIC_VERSION
   }

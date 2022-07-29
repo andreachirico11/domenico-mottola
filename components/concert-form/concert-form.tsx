@@ -4,6 +4,8 @@ import { Concert, Envs } from '../../types'
 import { FormInput } from '../form-input'
 import { validationSchema } from './concert-form-validation-schema'
 import { getErrMsgFunction } from '../../utils/getErrMsgFunction'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '../../utils'
 
 const initialValues: Concert = {
   _id: '',
@@ -14,19 +16,32 @@ const initialValues: Concert = {
   venue: '',
 }
 
-export const ConcertForm = ({ t }: { t: TFunction }) => {
+interface props {
+  t: TFunction
+  valueToUpdate?: Concert
+}
+
+export const ConcertForm = ({ t, valueToUpdate }: props) => {
   const descriptions = Envs.languages.map((locale) => ({ [locale]: '' }))
   const getErrormessage = getErrMsgFunction('concert_form', t)
 
-  const mockSubmit = (values: any) => {
-    console.log('submit')
-    console.log(values)
+  const mockSubmit = async (values: Concert) => {
+    if (valueToUpdate) {
+      // TODO update
+    } else {
+      delete values._id
+      await setDoc(doc(db.concerts), values)
+    }
   }
 
   return (
     <>
       <Formik
-        initialValues={{ ...initialValues, descriptions }}
+        initialValues={
+          valueToUpdate
+            ? { ...valueToUpdate }
+            : { ...initialValues, descriptions }
+        }
         validationSchema={validationSchema}
         onSubmit={mockSubmit}
       >

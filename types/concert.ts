@@ -1,5 +1,5 @@
 export interface Concert {
-  _id: string
+  _id?: string
   date: Date | string
   adress: string
   venue: string
