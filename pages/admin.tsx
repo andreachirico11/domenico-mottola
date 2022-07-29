@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ParsedUrlQuery } from 'querystring'
 import { ConcertForm } from '../components/concert-form'
+import { ConcertTable } from '../components/concert-table'
 import { useAuth } from '../hooks/useAuth'
 import { Envs } from '../types'
 
@@ -17,6 +18,7 @@ const Admin: NextPage = () => {
   return (
     <>
       <ConcertForm t={t}></ConcertForm>
+      <ConcertTable></ConcertTable>
     </>
   )
 }
